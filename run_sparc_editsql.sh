@@ -1,5 +1,10 @@
 #! /bin/bash
 
+rm -r processed_data*
+rm -r data/sparc_data_removefrom/
+rm logs/logs_sparc_editsql/*
+rm logs/logs_sparc_editsql/args.log
+
 # 1. preprocess dataset by the following. It will produce data/sparc_data_removefrom/
 
 python3 preprocess.py --dataset=sparc --remove_from

@@ -1,13 +1,18 @@
 #! /bin/bash
 
+rm -r processed_data*
+rm -r data/sparc_data_removefrom/
+rm logs/logs_sparc_editsql/*
+rm output.txt
+
 # 1. preprocess dataset by the following. It will produce data/sparc_data_removefrom/
 
-# python3 preprocess.py --dataset=sparc --remove_from
+python3 preprocess.py --dataset=sparc --remove_from
 
 # 2. train and evaluate.
 #    the result (models, logs, prediction outputs) are saved in $LOGDIR
 
-GLOVE_PATH="glove.840B.300d.txt" # you need to change this
+GLOVE_PATH="empty.txt" # you need to change this
 LOGDIR="logs/logs_sparc_editsql"
 
 CUDA_VISIBLE_DEVICES=5 python3 run.py --raw_train_filename="data/sparc_data_removefrom/train.pkl" \

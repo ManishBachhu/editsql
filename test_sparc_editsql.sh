@@ -7,7 +7,7 @@
 # 2. train and evaluate.
 #    the result (models, logs, prediction outputs) are saved in $LOGDIR
 
-GLOVE_PATH="/home/lily/rz268/dialog2sql/word_emb/glove.840B.300d.txt" # you need to change this
+GLOVE_PATH="glove.840B.300d.txt" # you need to change this
 LOGDIR="logs/logs_sparc_editsql"
 
 CUDA_VISIBLE_DEVICES=5 python3 run.py --raw_train_filename="data/sparc_data_removefrom/train.pkl" \
@@ -36,7 +36,7 @@ CUDA_VISIBLE_DEVICES=5 python3 run.py --raw_train_filename="data/sparc_data_remo
           --evaluate=1 \
           --evaluate_split="valid" \
           --use_predicted_queries=1 \
-          --save_file="$LOGDIR/save_31_sparc_editsql"
+          --save_file="save_31_sparc_editsql"
 
 # 3. get evaluation result
 

@@ -1,0 +1,2 @@
+SELECT * FROM Student   test_student
+SELECT * FROM Student WHERE name="Jack"   test_student

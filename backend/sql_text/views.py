@@ -9,6 +9,8 @@ import sys
 from nltk.tokenize import word_tokenize
 import nltk
 from subprocess import call
+import sqlite3
+import re
 
 
 
@@ -18,6 +20,21 @@ def read_json(file):
     data = json.load(f)
     f.close()
     return data
+
+def get_data(sql_query):
+    #Connecting to sqlite
+    conn = sqlite3.connect(
+        '/home/ubuntu/uhack/editsql2/editsql/data/database/test_student/test_student.sqlite'
+        )
+    #Creating a cursor object using the cursor() method
+    cursor = conn.cursor()
+    cursor.execute(sql_query)
+    rows = cursor.fetchall()
+    names = next(zip(*cursor.description))
+    
+    return (rows, names)
+
+
 def edit_json(text):
     file_path = "/home/ubuntu/uhack/editsql2/editsql/data/sparc/dev_no_value.json"
     data = read_json(file_path)
@@ -30,8 +47,22 @@ def edit_json(text):
     output_file = '/home/ubuntu/uhack/editsql2/editsql/output.txt'
     with open(output_file, 'r') as f:
         sql_q = f.read()
-    sql_q = sql_q[1:-5] + " from student"
-    return sql_q
+    sql_q = sql_q[1:-5] + "from Student"
+    expr = "\s[a-z]*\.\*\\s"
+    expr2 = " * "
+    sql_q = re.sub(expr,expr2,sql_q)
+    try:
+        rows, cols = get_data(sql_q)
+    except Exception:
+        rows = []
+        cols = []
+    
+    response = {
+        "sql_query": sql_q,
+        "rows": rows,
+        "cols": cols
+    }
+    return response
 
 
 class EditSQLView(APIView):

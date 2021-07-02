@@ -25,12 +25,12 @@ class MainComponent extends React.Component {
 
   handleClick = (event) => {
     const {input} = this.state;
-    axios.post('https://jsonplaceholder.typicode.com/todos/1', {
+    axios.post('ec2-3-134-113-12.us-east-2.compute.amazonaws.com:8000/sql', {
         "input_text": input
     })
     .then((response) => {
         console.log(response);
-        this.setState({output: "Result here"});
+        this.setState({output:  response.data});
     })
     .catch(function (error) {
         console.log(error);

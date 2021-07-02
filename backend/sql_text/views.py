@@ -30,7 +30,7 @@ def edit_json(text):
     output_file = '/home/ubuntu/uhack/editsql2/editsql/output.txt'
     with open(output_file, 'r') as f:
         sql_q = f.read()
-    sql_q = sql_q[1:-5] + " FROM Student"
+    sql_q = sql_q[1:-5] + " from student"
     return sql_q
 
 

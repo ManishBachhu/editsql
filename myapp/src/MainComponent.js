@@ -25,9 +25,17 @@ class MainComponent extends React.Component {
 
   handleClick = (event) => {
     const {input} = this.state;
-    axios.post('ec2-3-134-113-12.us-east-2.compute.amazonaws.com:8000/sql', {
+    axios.post(
+      'ec2-3-134-113-12.us-east-2.compute.amazonaws.com:8000/sql', 
+      {
         "input_text": input
-    })
+      },
+      {
+        headers : {
+          "Content-Type" : "application/json"
+        }
+      }
+    )
     .then((response) => {
         console.log(response);
         this.setState({output:  response.data});
